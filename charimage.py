@@ -1,27 +1,34 @@
 from os import system
 
 class charimage:
-	def __init__(self,bg:str,fg:str):
-		if len(bg)!=1 or len(fg)!=1:
-			raise ValueError("Background character must be only 1 character long")
+	def __init__(self,bg:str):
+		if len(bg)!=1:
+			raise ValueError("Parameter must be only 1 character long")
 		self.bg = bg
-		self.fg = fg
 	def generate(self,height:int,width:int):
 		self.height = height
 		self.width = width
 		linelist = list()
 		for i in range(height):
-			string = ""
+			line = []
 			for i in range(width):
-				string += self.bg
-			linelist.append(string)
-		self.line = linelist
+				line append(self.bg)
+			linelist.append(line)
+		self.imageline = linelist
 		return linelist
 	def __str__(self):
 		s = ""
-		for lines in self.line:
-			s += lines +"\n"
+		for lines in self.imageline:
+            for character in lines:
+                s += character
+			s += "\n"
 		return s
+    def addcharacter(char:str,*positions):
+        if len(char)!=1:
+			raise ValueError("Parameter must be only 1 character long")
+        for i in self.line:
+            for j in positions:
+                pass
 
 def clear():
     system('clear')
@@ -30,11 +37,10 @@ if __name__ == "__main__":
 	clear()
 	while True:
 		bg = input("background character: ")
-		fg = input("foreground character: ")
 		if len(bg) == 1 and len(fg) == 1:break
 		else:print("invalid input")
 	x = False
-	img = charimage(bg,fg)
+	img = charimage(bg)
 	while True:
 		prompt = input("[Prompt]: ")
 		if prompt == "exit":break
