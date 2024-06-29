@@ -28,6 +28,12 @@ class charimage:
             raise ValueError("Argument must be only 1 character long")
         for i in positions:
             self.imageline[i[0]][i[1]] = char
+        return self.imageline
+    def changeline(self,char:str,*lines):#lines must be given as line
+        for i in lines:
+            for j in range(self.width):
+                self.imageline[i][j] = char
+        return self.imageline
 
 def clear():
     system('clear')
